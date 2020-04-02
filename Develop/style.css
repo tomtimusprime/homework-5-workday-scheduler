@@ -21,7 +21,7 @@ textarea{
   border-bottom: 10px solid black;
 }
 
-.description{
+/* .description{
   white-space: pre-wrap;
 }
 
@@ -68,4 +68,17 @@ textarea{
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+} */
+.row-striped:nth-of-type(odd){
+  background-color: #efefef;
+  border-left: 4px #000000 solid;
+}
+
+.row-striped:nth-of-type(even){
+  background-color: #ffffff;
+  border-left: 4px #efefef solid;
+}
+
+.row-striped {
+    padding: 15px 0;
 }
