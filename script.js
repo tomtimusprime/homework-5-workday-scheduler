@@ -16,7 +16,8 @@
 $(document).ready(function () {
     let nowEl = $("#currentDay");
     const currentDay = moment().format("dddd MM-DD-YY");
-    nowEl.text(currentDay);
+    const displayNowEl = moment().format("dddd, MMMM Do YYYY, h:mm a");
+    nowEl.text(displayNowEl);
     //Get data from local storage 
     let scheduleData = getScheduleData();
     saveData(scheduleData, currentDay);
