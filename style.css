@@ -82,3 +82,13 @@ textarea{
 .row-striped {
     padding: 15px 0;
 }
+
+.past {
+  background: #f7f7f7;
+}
+.present {
+  background: #d9534f;
+}
+.future {
+  background: #5cb85c
+}
