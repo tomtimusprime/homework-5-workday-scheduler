@@ -1,4 +1,4 @@
-
+//The function names should be fairly self-explanatory, but I'll add comments where it seems prudent.
 $(document).ready(function () {
     setUp();
 
@@ -11,7 +11,6 @@ $(document).ready(function () {
                 let buttonIndex = button.data("time");
                 let scheduleData = getScheduleData();
                 let eventText = $(element).find(".text-area").val();
-                console.log(buttonIndex, scheduleData, eventText, button);
                 scheduleData[buttonIndex].text = eventText;
                 let currentDay = getCurrentDay();
                 saveData(scheduleData, currentDay);
@@ -19,23 +18,25 @@ $(document).ready(function () {
         })
     }
 
+    //Uses the moment.js library to return the current day and is formatted accordingly
     function getCurrentDay() {
         return moment().format("dddd MM-DD-YY");
+        //The following line of code is used for testing
         //return moment().add(1, 'days').format("dddd MM-DD-YY");
     }
 
-
+    //This function access local storage to get the data that was previously entered in order to persist on the page.
     function getScheduleData() {
         let currentDay = getCurrentDay();
         let data = localStorage.getItem(currentDay);
         data = JSON.parse(data);
-        console.log(data);
         if (!data) {
             data = generateScheduleData();
         }
         return data;
     };
 
+    //This array is created to align with the different time blocks on the calendar in order to save in local storage accordingly.
     function generateScheduleData() {
         return [
             {
@@ -81,6 +82,7 @@ $(document).ready(function () {
         ];
     }
 
+    //This function handles the color coding of the tiem blocks depending on what time it is throughout the day
     function updateTimeBlocks($timeBlocks, scheduleData) {
         let currentHour = moment().hour();
         $timeBlocks.each((index, element) => {
@@ -104,11 +106,14 @@ $(document).ready(function () {
         });
     }
 
+    //This function handles the saving of the data on each time block to localStorage to be able to persist later.
     function saveData(scheduleData, currentDay) {
         localStorage.setItem(currentDay, JSON.stringify(scheduleData));
 
     }
 
+    //This is the first function that's called to kick off the program and pull data from localStorage if there is any to
+    //display it on the screen.
     function setUp() {
         let nowEl = $("#currentDay");
         const currentDay = getCurrentDay();
@@ -118,8 +123,6 @@ $(document).ready(function () {
         let scheduleData = getScheduleData();
         saveData(scheduleData, currentDay);
         const $timeBlocks = $(".text-area");
-        console.log(scheduleData);//*
-        console.log($timeBlocks);//*
         updateTimeBlocks($timeBlocks, scheduleData);
         addListeners();
     }
